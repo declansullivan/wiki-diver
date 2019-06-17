@@ -11,6 +11,10 @@ import setup
 import diver
 
 if __name__ == '__main__':
+    # Establish connection to Twitter account.
     API = setup.connect_account()
 
-    diver.test_read()
+    # Get information for next tweet, tweet it.
+    title, url = diver.create_tweet(API)
+    API.update_status(title + " - " + url)
+    
