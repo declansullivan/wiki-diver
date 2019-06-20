@@ -16,5 +16,5 @@ if __name__ == '__main__':
 
     # Get information for next tweet, tweet it.
     title, url = diver.create_tweet(API)
-    API.update_status(title + " - " + url)
-    
+    tweet = title + " - " + url
+    API.update_status(tweet)
