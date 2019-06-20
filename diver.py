@@ -20,9 +20,10 @@ def create_tweet(api):
     its title, then tweets that information.
     """
     # Get most recent link.
-    recent_tweet = api.user_timeline('WikiDiver')[0].text.split('-')
-    curr_link = recent_tweet[1][1:]
-
+    recent_tweet = api.user_timeline('WikiDiver')[0].text
+    link_index = recent_tweet.index('https://')
+    curr_link = recent_tweet[link_index:]
+    
     # Pull information from related page.
     request = requests.get(curr_link)
     soup = BeautifulSoup(request.text, 'html.parser')
@@ -35,6 +36,7 @@ def create_tweet(api):
             poss_destinations += [link]
 
     # Get next link and find relating title.
+    random.shuffle(poss_destinations)
     curr_link = BASE_URL + random.choice(poss_destinations).get('href')
     request = requests.get(curr_link)
     soup = BeautifulSoup(request.text, 'html.parser')
