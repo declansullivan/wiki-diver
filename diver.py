@@ -51,7 +51,7 @@ def valid_link(link):
     links we are looking for connect to another Wikipedia page and have a title.
     """
     # Look for links with attributes title and href.
-    if len(link.attrs) != 2:
+    if len(link.attrs) not in [2, 3]:
         return False
 
     # URL should use /wiki/ to head to next page, should not be a help page,
