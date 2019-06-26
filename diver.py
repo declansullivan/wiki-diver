@@ -23,6 +23,10 @@ def create_tweet(api):
     recent_tweet = api.user_timeline('WikiDiver')[0].text
     link_index = recent_tweet.index('https://')
     curr_link = recent_tweet[link_index:]
+
+    # Remove trailing period, if any.
+    if (curr_link[-1] == '.'):
+        curr_link = curr_link[:-1]
     
     # Pull information from related page.
     request = requests.get(curr_link)
